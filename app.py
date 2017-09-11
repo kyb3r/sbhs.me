@@ -1,6 +1,5 @@
 from requests_oauthlib import OAuth2Session
 from flask import Flask, request, redirect, session, url_for
-from flask_login
 from flask.json import jsonify
 import os
 app = Flask(__name__)
