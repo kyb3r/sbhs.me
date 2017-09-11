@@ -3,6 +3,7 @@ from flask import Flask, request, redirect, session, url_for, render_template
 from flask.json import jsonify
 import os
 import time
+from functools import wraps
 app = Flask(__name__)
 
 client_id = 'sbhs-me'
@@ -10,13 +11,16 @@ client_secret = 'YcqjZeIP1W32vKzlMjJYYn_EqrY'
 auth_base_url = 'https://student.sbhs.net.au/api/authorize'
 token_url = 'https://student.sbhs.net.au/api/token'
 
-def login_required(func):
-    def wrapper(*args, **kwargs):
-        if session['logged_in'] is False:
-          return redirect(url_for('login'))
-        else:
-          return func(*args, **kwargs)
-    return wrapper
+def login_required():
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+            if session['logged_in'] is False:
+              return redirect(url_for('login'))
+            else:
+              return func(*args, **kwargs)
+        return wrapper
+    return decorator
 
 @app.route('/')
 def index():
@@ -42,13 +46,13 @@ def callback():
     return redirect(url_for('.profile'))
 
 @app.route("/profile", methods=["GET"])
-@login_required
+@login_required()
 def profile():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/details/userinfo.json').json())
 
 @app.route('/notices', methods=["GET"])
-@login_required
+@login_required()
 def daily_notices():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/dailynews/list.json').json())
