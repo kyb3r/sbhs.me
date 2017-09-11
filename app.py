@@ -1,4 +1,4 @@
-frfrom requests_oauthlib import OAuth2Session
+from requests_oauthlib import OAuth2Session
 from flask import Flask, request, redirect, session, url_for
 from flask.json import jsonify
 import os
