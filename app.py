@@ -17,7 +17,7 @@ def login_required():
         @wraps(func)
         def wrapper(*args, **kwargs):
             if session['logged_in'] is False:
-              return redirect(url_for('login'))
+              return render_template('not_logged_in.html')
             else:
               return func(*args, **kwargs)
         return wrapper
@@ -25,12 +25,14 @@ def login_required():
 
 @app.route('/')
 def index():
+    '''Home page, still need to work on it.'''
     if session.get('logged_in') is None:
         session['logged_in'] = False 
     return render_template('tests.html')
 
 @app.route('/login')
 def login():
+    '''Redirects to oauth'''
     sbhs = OAuth2Session(client_id)
     authorization_url, state = sbhs.authorization_url(auth_base_url)
     session['oauth_state'] = state
@@ -38,9 +40,10 @@ def login():
 
 @app.route('/logout')
 def logout():
+    '''Clears the session and logs out.'''
     if session['logged_in'] is True:
         session.clear()
-    return redirect(url_for('index'))
+    return render_template('logout.html')
 
 @app.route('/callback', methods=['GET'])
 def callback():
@@ -50,7 +53,7 @@ def callback():
                              authorization_response=request.url)
     session['oauth_token'] = token
     session['logged_in'] = True
-    return redirect(url_for('profile'))
+    return render_template('logged_in.html')
 
 @app.route("/profile", methods=["GET"])
 @login_required()
