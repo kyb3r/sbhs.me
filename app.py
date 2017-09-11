@@ -8,6 +8,7 @@ app = Flask(__name__)
 client_id = 'sbhs-me'
 client_secret = 'YcqjZeIP1W32vKzlMjJYYn_EqrY'
 auth_base_url = 'https://student.sbhs.net.au/api/authorize'
+token_url = 'https://student.sbhs.net.au/api/token'
 app.secret_key = os.urandom(24)
 
 @app.route('/')
@@ -34,7 +35,6 @@ def profile():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/details/userinfo.json').json())
 
-if __name__ == "__main__":
-    app.run(debug=True, port=os.environ.get('PORT'))
+app.run(debug=True, port=os.environ.get('PORT'))
 
 
