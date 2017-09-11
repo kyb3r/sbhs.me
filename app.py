@@ -85,9 +85,10 @@ def daily_notices():
 @login_required()
 def dynamic(endpoint):
     if endpoint not in auth_required_endpoints:
+        print(f'THIS ENDPOINT=====: endpoint')
         return '<h1>Invalid Endpoint!</h1>\n' \
                '<p>Auth endpoints:\n{}</p>' \
-               .format('\n'.join(auth_required_endpoints))
+               .format(', '.join(auth_required_endpoints))
 
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get(f'https://student.sbhs.net.au/api/{endpoint}').json())
