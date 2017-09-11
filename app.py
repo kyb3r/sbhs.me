@@ -9,7 +9,7 @@ client_secret = 'YcqjZeIP1W32vKzlMjJYYn_EqrY'
 auth_base_url = 'https://student.sbhs.net.au/api/authorize'
 token_url = 'https://student.sbhs.net.au/api/token'
 app.secret_key = os.urandom(24)
-os.environ['DEBUG'] = "1"
+
 
 @app.route('/')
 def index():
@@ -51,6 +51,7 @@ def profile():
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/details/userinfo.json').json())
 
 if __name__ == '__main__':
+    os.environ['DEBUG'] = "1"
     app.run(debug=True, port=os.environ.get('PORT'))
 
 
