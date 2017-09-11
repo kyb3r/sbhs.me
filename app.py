@@ -24,6 +24,7 @@ def login():
     sbhs = OAuth2Session(client_id)
     authorization_url, state = sbhs.authorization_url(auth_base_url)
     session['oauth_state'] = state
+    session.modified = True
     print('_______________AFTER_AUTHORISATION_____________________')
     print(session)
     print('____________________________________')
@@ -31,14 +32,14 @@ def login():
 
 @app.route('/callback', methods=['GET'])
 def callback():
-    time.sleep(1)
     print('______________Before_FETCH_TOKEN_________________')
     print(session)
     print('____________________________________')
     sbhs = OAuth2Session(client_id, state=session['oauth_state'])
     token = sbhs.fetch_token(token_url, client_secret=client_secret,
                                authorization_response=request.url)
-    session['oauth_token'] = token
+    session['oauth_token'] = token['access_token']
+    session.modified = True
     print('______________After_FETCH_TOKEN_________________')
     print(session)
     print('____________________________________')
@@ -46,7 +47,6 @@ def callback():
 
 @app.route("/profile", methods=["GET"])
 def profile():
-    time.sleep(1)
     print('_______________BEFORE_PROFILE_REDIRECT___________________')
     print(session)
     print('____________________________________')
