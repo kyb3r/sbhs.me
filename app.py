@@ -1,5 +1,6 @@
 from requests_oauthlib import OAuth2Session
 from flask import Flask, request, redirect, session, url_for
+from flask_login
 from flask.json import jsonify
 import os
 app = Flask(__name__)
@@ -27,12 +28,12 @@ def callback():
     sbhs = OAuth2Session(client_id, state=session['oauth_state'])
     token = sbhs.fetch_token(token_url, client_secret=client_secret,
                                authorization_response=request.url)
-    print(token)
     session['oauth_token'] = token
     return redirect(url_for('.profile'))
 
 @app.route("/profile", methods=["GET"])
 def profile():
+    print(session)
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/details/userinfo.json').json())
 

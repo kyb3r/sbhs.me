@@ -2,3 +2,5 @@ flask
 requests
 requests_oauthlib
 gunicorn
+flask_login
+flask_sqlalchemy
