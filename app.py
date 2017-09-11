@@ -46,6 +46,7 @@ def callback():
 
 @app.route("/profile", methods=["GET"])
 def profile():
+    time.sleep(1)
     print('_______________BEFORE_PROFILE_REDIRECT___________________')
     print(session)
     print('____________________________________')
