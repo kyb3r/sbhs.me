@@ -81,7 +81,7 @@ def daily_notices():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/dailynews/list.json').json())
 
-@app.route('/api/<endpoint>', methods=["GET"])
+@app.route('/api/<path:endpoint>', methods=["GET"])
 @login_required()
 def dynamic(endpoint):
     if endpoint not in auth_required_endpoints:
