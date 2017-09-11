@@ -40,7 +40,7 @@ def login():
 def logout():
     if session['logged_in'] is True:
         session.clear()
-    return redirect(url_for('/'))
+    return redirect(url_for('index'))
 
 @app.route('/callback', methods=['GET'])
 def callback():
@@ -51,7 +51,7 @@ def callback():
     session['oauth_token'] = token
     session['logged_in'] = True
     print(f'SESSION================{session}')
-    return redirect(url_for('.profile'))
+    return redirect(url_for('profile'))
 
 @app.route("/profile", methods=["GET"])
 @login_required()
@@ -64,7 +64,6 @@ def profile():
 def daily_notices():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/dailynews/list.json').json())
-
 
 
 if __name__ == '__main__':
