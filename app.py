@@ -5,13 +5,12 @@ from functools import wraps
 import os
 
 app = Flask(__name__)
+app.secret_key = 'jyuukverixxdingledongle'
 
 client_id = 'sbhs-me'
 client_secret = 'YcqjZeIP1W32vKzlMjJYYn_EqrY'
 auth_base_url = 'https://student.sbhs.net.au/api/authorize'
 token_url = 'https://student.sbhs.net.au/api/token'
-app.secret_key = 'blalalalababfafalfa'
-
 auth_required_endpoints = (
     'barcodenews/list.json',
     'dailynews/list.json',
@@ -27,7 +26,10 @@ def login_required():
         @wraps(func)
         def wrapper(*args, **kwargs):
             if not session.get('logged_in'):
-              return render_template('not_logged_in.html')
+              return render_template('template.html', 
+                top='Unauthorized!', 
+                bot='You need to be logged in for that.'
+                )
             else:
               return func(*args, **kwargs)
         return wrapper
@@ -38,7 +40,7 @@ def index():
     '''Home page, still need to work on it.'''
     if session.get('logged_in') is None:
         session['logged_in'] = False 
-    return render_template('tests.html')
+    return render_template('template.html', top='COMING SOON', bot='sbhs.me')
 
 @app.route('/login')
 def login():
@@ -50,14 +52,14 @@ def login():
 
 @app.route('/logged-in')
 def _logged_in():
-    return render_template('logged_in.html')
+    return render_template('template.html', top='Logged In!', bot='sbhs.me')
 
 @app.route('/logout')
 def logout():
     '''Clears the session and logs out.'''
     if session.get('logged_in'):
         session.clear()
-        return render_template('logout.html')
+        return render_template('template.html', top='Logged Out!', bot='sbhs.me')
     else:
         return render_template('template.html', top='Logged Out!', bot='But you were never logged in!')
 
