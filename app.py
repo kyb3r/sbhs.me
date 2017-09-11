@@ -18,8 +18,8 @@ auth_required_endpoints = (
     'diarycalendar/events.json',
     'details/particiaption.json',
     'details/userinfo.json',
-    'timetable/daytimetable.json'
-    'timetable/timetable.json'
+    'timetable/daytimetable.json',
+    'timetable/timetable.json',
     )
 
 def login_required():
@@ -85,7 +85,6 @@ def daily_notices():
 @login_required()
 def dynamic(endpoint):
     if endpoint not in auth_required_endpoints:
-        print(f'THIS ENDPOINT=====: {endpoint}')
         return '<h1>Invalid Endpoint!</h1>\n' \
                '<p>Auth endpoints:\n{}</p>' \
                .format(', '.join(auth_required_endpoints))
