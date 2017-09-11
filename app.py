@@ -12,6 +12,16 @@ auth_base_url = 'https://student.sbhs.net.au/api/authorize'
 token_url = 'https://student.sbhs.net.au/api/token'
 app.secret_key = 'blalalalababfafalfa'
 
+auth_required_endpoints = (
+    'barcodenews/list.json',
+    'dailynews/list.json',
+    'diarycalendar/events.json',
+    'details/particiaption.json',
+    'details/userinfo.json',
+    'timetable/daytimetable.json'
+    'timetable/timetable.json'
+    )
+
 def login_required():
     def decorator(func):
         @wraps(func)
@@ -70,6 +80,18 @@ def profile():
 def daily_notices():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/dailynews/list.json').json())
+
+@app.route('/api/{endpoint}', methods=["GET"])
+@login_required()
+def dynamic(endpoint):
+    if endpoint not in auth_required_endpoints:
+        return '<h1>Invalid Endpoint!</h1>\n' \
+               '<p>Auth endpoints:\n{}</p>' \
+               .format('\n'.join(auth_required_endpoints))
+
+    sbhs = OAuth2Session(client_id, token=session['oauth_token'])
+    return jsonify(sbhs.get(f'https://student.sbhs.net.au/api/{endpoint}').json())
+
 
 
 if __name__ == '__main__':
