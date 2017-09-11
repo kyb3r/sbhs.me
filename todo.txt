@@ -1,0 +1,5 @@
+- Basic timetable stuff
+- To do list
+- Statistics of grades
+- Extra curricular
+- Exams
