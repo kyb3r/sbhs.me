@@ -66,4 +66,4 @@ if __name__ == "__main__":
 
     app.secret_key = os.urandom(24)
     print(os.environ)
-    app.run(debug=True, port=int(os.environ.get('$PORT')))
+    app.run(debug=True, port=int(os.environ.get('PORT')))
