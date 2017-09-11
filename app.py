@@ -36,6 +36,12 @@ def login():
     session['oauth_state'] = state
     return redirect(authorization_url)
 
+@app.rout('/logout')
+def logout():
+    if session['logged_in'] is True:
+        session.clear()
+    return redirect(url_for('/'))
+
 @app.route('/callback', methods=['GET'])
 def callback():
     sbhs = OAuth2Session(client_id, state=session['oauth_state'])
@@ -58,6 +64,8 @@ def profile():
 def daily_notices():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/dailynews/list.json').json())
+
+
 
 if __name__ == '__main__':
     os.environ['DEBUG'] = "1"
