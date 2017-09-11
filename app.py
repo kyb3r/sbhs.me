@@ -5,7 +5,7 @@ from functools import wraps
 import os
 
 app = Flask(__name__)
-app.secret_key = 'jyuukverixxdingledongle'
+app.secret_key = 'jyuukverixxsupascretkeywtflmao'
 
 client_id = 'sbhs-me'
 client_secret = 'YcqjZeIP1W32vKzlMjJYYn_EqrY'
