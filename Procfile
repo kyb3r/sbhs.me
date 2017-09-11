@@ -1,1 +1,1 @@
-web: python oauthtests.py
+web: gunicorn app:oauthtests.py
