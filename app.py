@@ -2,6 +2,7 @@ from requests_oauthlib import OAuth2Session
 from flask import Flask, request, redirect, session, url_for
 from flask.json import jsonify
 import os
+import time
 app = Flask(__name__)
 
 client_id = 'sbhs-me'
@@ -30,6 +31,7 @@ def login():
 
 @app.route('/callback', methods=['GET'])
 def callback():
+    time.sleep(1)
     print('______________Before_FETCH_TOKEN_________________')
     print(session)
     print('____________________________________')
