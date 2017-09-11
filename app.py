@@ -44,6 +44,7 @@ def callback():
                              authorization_response=request.url)
     session['oauth_token'] = token
     session['logged_in'] = True
+    print(f'SESSION================{session}')
     return redirect(url_for('.profile'))
 
 @app.route("/profile", methods=["GET"])
