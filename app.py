@@ -13,8 +13,8 @@ token_url = 'https://student.sbhs.net.au/api/token'
 app.secret_key = 'blalalalababfafalfa'
 
 def login_required():
-    def decorator(f):
-        @wraps(f)
+    def decorator(func):
+        @wraps(func)
         def wrapper(*args, **kwargs):
             if session['logged_in'] is False:
               return redirect(url_for('login'))
