@@ -38,7 +38,7 @@ def callback():
     sbhs = OAuth2Session(client_id, state=session['oauth_state'])
     token = sbhs.fetch_token(token_url, client_secret=client_secret,
                                authorization_response=request.url)
-    session['oauth_token'] = token['access_token']
+    session['oauth_token'] = token
     print('______________After_FETCH_TOKEN_________________')
     print(session)
     print('____________________________________')
