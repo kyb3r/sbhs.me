@@ -55,9 +55,11 @@ def _logged_in():
 @app.route('/logout')
 def logout():
     '''Clears the session and logs out.'''
-    if session['logged_in'] is True:
+    if session.get('logged_in'):
         session.clear()
-    return render_template('logout.html')
+        return render_template('logout.html')
+    else:
+        return render_template('template.html', top='Logged Out!', bot='But you were never logged in!')
 
 @app.route('/callback', methods=['GET'])
 def callback():
