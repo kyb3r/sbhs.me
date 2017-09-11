@@ -1,9 +1,9 @@
 from requests_oauthlib import OAuth2Session
 from flask import Flask, request, redirect, session, url_for, render_template
 from flask.json import jsonify
-import os
-import time
 from functools import wraps
+import os
+
 app = Flask(__name__)
 
 client_id = 'sbhs-me'
@@ -81,7 +81,7 @@ def daily_notices():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/dailynews/list.json').json())
 
-@app.route('/api/{endpoint}', methods=["GET"])
+@app.route('/api/<endpoint>', methods=["GET"])
 @login_required()
 def dynamic(endpoint):
     if endpoint not in auth_required_endpoints:
@@ -91,7 +91,6 @@ def dynamic(endpoint):
 
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get(f'https://student.sbhs.net.au/api/{endpoint}').json())
-
 
 
 if __name__ == '__main__':
