@@ -42,7 +42,7 @@ def profile():
     print('____________________________________')
     print(session)
     print('____________________________________')
-    sbhs = OAuth2Session(client_id, token=session['oauth_token'])
+    sbhs = OAuth2Session(client_id, token=session['oauth_token']['access_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/details/userinfo.json').json())
 
 if __name__ == '__main__':
