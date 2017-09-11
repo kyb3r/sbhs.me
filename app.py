@@ -35,6 +35,7 @@ def profile():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/details/userinfo.json').json())
 
-app.run(debug=True, port=os.environ.get('PORT'))
+if __name__ == '__main__':
+    app.run(debug=True, port=os.environ.get('PORT'))
 
 
