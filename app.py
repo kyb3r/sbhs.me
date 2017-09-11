@@ -10,6 +10,7 @@ client_id = 'sbhs-me'
 client_secret = 'YcqjZeIP1W32vKzlMjJYYn_EqrY'
 auth_base_url = 'https://student.sbhs.net.au/api/authorize'
 token_url = 'https://student.sbhs.net.au/api/token'
+app.secret_key = 'blalalalababfafalfa'
 
 def login_required():
     def decorator(f):
@@ -58,7 +59,6 @@ def daily_notices():
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/dailynews/list.json').json())
 
 if __name__ == '__main__':
-    app.secret_key = 'blalalalababfafalfa'
     os.environ['DEBUG'] = "1"
     app.run(debug=True, port=os.environ.get('PORT'))
 
