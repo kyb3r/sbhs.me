@@ -38,6 +38,10 @@ def login():
     session['oauth_state'] = state
     return redirect(authorization_url)
 
+@app.route('/logged-in')
+def _logged_in():
+    return render_template('logged_in.html')
+
 @app.route('/logout')
 def logout():
     '''Clears the session and logs out.'''
@@ -53,7 +57,7 @@ def callback():
                              authorization_response=request.url)
     session['oauth_token'] = token
     session['logged_in'] = True
-    return render_template('logged_in.html')
+    return redirect(url_for('_logged_in'))
 
 @app.route("/profile", methods=["GET"])
 @login_required()
