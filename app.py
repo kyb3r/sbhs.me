@@ -20,7 +20,6 @@ def login():
     sbhs = OAuth2Session(client_id)
     authorization_url, state = sbhs.authorization_url(auth_base_url)
     session['oauth_state'] = state
-    print(session)
     return redirect(authorization_url)
 
 @app.route('/callback', methods=['GET'])
@@ -28,6 +27,7 @@ def callback():
     sbhs = OAuth2Session(client_id, state=session['oauth_state'])
     token = sbhs.fetch_token(token_url, client_secret=client_secret,
                                authorization_response=request.url)
+    print(token)
     session['oauth_token'] = token
     return redirect(url_for('.profile'))
 
