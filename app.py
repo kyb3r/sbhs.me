@@ -9,7 +9,7 @@ client_id = 'sbhs-me'
 client_secret = 'YcqjZeIP1W32vKzlMjJYYn_EqrY'
 auth_base_url = 'https://student.sbhs.net.au/api/authorize'
 token_url = 'https://student.sbhs.net.au/api/token'
-app.secret_key = os.urandom(24)
+app.secret_key = 'blalalalababfafalfa'
 
 
 @app.route('/')
@@ -24,7 +24,6 @@ def login():
     sbhs = OAuth2Session(client_id)
     authorization_url, state = sbhs.authorization_url(auth_base_url)
     session['oauth_state'] = state
-    session.modified = True
     print('_______________AFTER_AUTHORISATION_____________________')
     print(session)
     print('____________________________________')
@@ -39,7 +38,6 @@ def callback():
     token = sbhs.fetch_token(token_url, client_secret=client_secret,
                                authorization_response=request.url)
     session['oauth_token'] = token['access_token']
-    session.modified = True
     print('______________After_FETCH_TOKEN_________________')
     print(session)
     print('____________________________________')
