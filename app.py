@@ -16,7 +16,7 @@ def login_required():
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            if session['logged_in'] is False:
+            if not session.get('logged_in'):
               return render_template('not_logged_in.html')
             else:
               return func(*args, **kwargs)
