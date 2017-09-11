@@ -36,7 +36,7 @@ def login():
     session['oauth_state'] = state
     return redirect(authorization_url)
 
-@app.rout('/logout')
+@app.route('/logout')
 def logout():
     if session['logged_in'] is True:
         session.clear()
