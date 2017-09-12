@@ -1,5 +1,5 @@
 from requests_oauthlib import OAuth2Session
-from flask import Flask, request, redirect, session, url_for, render_template
+from flask import Flask, request, redirect, session, url_for, render_template, g
 from flask.json import jsonify
 from functools import wraps
 import os
@@ -40,14 +40,14 @@ def index():
     '''Home page, still need to work on it.'''
     if session.get('logged_in') is None:
         session['logged_in'] = False 
-    return render_template('template.html', top='COMING SOON', bot='sbhs.me')
+    return render_template('countdown.html')
 
 @app.route('/login')
 def login():
     '''Redirects to oauth'''
     sbhs = OAuth2Session(client_id)
     authorization_url, state = sbhs.authorization_url(auth_base_url)
-    session['oauth_state'] = state
+    session['oauth_state'] = state 
     return redirect(authorization_url)
 
 @app.route('/logged-in')
@@ -61,7 +61,7 @@ def logout():
         session.clear()
         return render_template('template.html', top='Logged Out!', bot='sbhs.me')
     else:
-        return render_template('template.html', top='Logged Out!', bot='But you were never logged in!')
+        return render_template('template.html', top='You cant log out!', bot='If you are not logged in!')
 
 @app.route('/callback', methods=['GET'])
 def callback():
