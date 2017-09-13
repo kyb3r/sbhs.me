@@ -10,7 +10,7 @@
 <style>
 body,h1 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
-.black-colour{
+.black-colour {
   color:black;
 }
 .bgimg {
@@ -33,11 +33,11 @@ body, html {height: 100%}
 </div>
   <div class="w3-display-bottomleft w3-padding-large">
   {% if logged_in %}
-  <a href="/login/" class="w3-bar-item w3-button">Login</a>
+  <a href="/login" class="w3-bar-item w3-button">Login</a>
   {% else %}
-  <a href="/logout/" class="w3-bar-item w3-button">Logout</a>
+  <a href="/logout" class="w3-bar-item w3-button">Logout</a>
   {% endif %}
-  <a href="/notices/" class="w3-bar-item w3-button">Notices</a>
+  <a href="/notices" class="w3-bar-item w3-button">Notices</a>
   </div>
 <script>
 var countDownDate = new Date("Sep 18, 2017 15:15:25").getTime();
