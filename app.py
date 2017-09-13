@@ -86,6 +86,11 @@ def daily_notices():
     sbhs = OAuth2Session(client_id, token=session['oauth_token'])
     return jsonify(sbhs.get('https://student.sbhs.net.au/api/dailynews/list.json').json())
 
+@app.route('/todo', methods=["GET"])
+@login_required()
+def todo_list():
+    return render_template('template.html', top='Error!', bot='Not implemented yet!')
+
 @app.route('/api/<path:endpoint>', methods=["GET"])
 @login_required()
 def dynamic(endpoint):
