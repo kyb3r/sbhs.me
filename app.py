@@ -40,7 +40,7 @@ def index():
     '''Home page, still need to work on it.'''
     if session.get('logged_in') is None:
         session['logged_in'] = False 
-    return render_template('countdown.html', logged_in=session['logged_in'])
+    return render_template('countdown.html', logged_in=1 if session['logged_in'] else 0)
 
 @app.route('/login')
 def login():
