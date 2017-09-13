@@ -10,52 +10,49 @@
 <style>
 body,h1 {font-family: "Raleway", sans-serif}
 body, html {height: 100%}
+.black-colour{
+  color:black;
+}
 .bgimg {
-    background-image: url('https://wallpapercave.com/wp/KPZGQrc.jpg');
+    background-color: white;
     min-height: 100%;
     background-position: center;
     background-size: cover;
 }
 </style>
 <body>
-
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
   <div class="w3-display-topleft w3-padding-large w3-xlarge">
-    <img height="60" width="45" src="https://login.sbhs.net.au/shssupport/assets/images/sbhs-white.gif">
+    <img height="45" width="45" src="http://freevector.co/wp-content/uploads/2014/05/84221-big-clock.png">
   </div>
   <div class="w3-display-middle">
-    <h1 class="w3-jumbo w3-animate-top">SATIRE ESSAY</h1>
-    <hr class="w3-border-grey" style="margin:auto;width:40%">
-    <p id="count" class="w3-large w3-center"> </p>
+    <h1 class="w3-jumbo w3-animate-top black-colour" >SATIRE ESSAY</h1>
+    <hr class="w3-border-grey" style="margin:auto; width:40%;">
+    <p id="count" class="w3-large w3-center black-colour"> </p>
   </div>
 </div>
   <div class="w3-display-bottomleft w3-padding-large">
-  Good Job! You Found This!
+  {% if logged_in %}
+  <a href="/login/" class="w3-bar-item w3-button">Login</a>
+  {% else %}
+  <a href="/logout/" class="w3-bar-item w3-button">Logout</a>
+  {% endif %}
+  <a href="/notices/" class="w3-bar-item w3-button">Notices</a>
   </div>
 <script>
-// Set the date we're counting down to
 var countDownDate = new Date("Sep 18, 2017 15:15:25").getTime();
-
-// Update the count down every 1 second
 var x = setInterval(function() {
 
-  // Get todays date and time
   var now = new Date().getTime();
-
-  // Find the distance between now an the count down date
   var distance = countDownDate - now;
-
-  // Time calculations for days, hours, minutes and seconds
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
   var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  // Display the result in the element with id="demo"
   document.getElementById("count").innerHTML = days + "d " + hours + "h "
   + minutes + "m " + seconds + "s ";
 
-  // If the count down is finished, write some text 
   if (distance < 0) {
     clearInterval(x);
     document.getElementById("count").innerHTML = "EXPIRED";

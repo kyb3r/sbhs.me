@@ -40,7 +40,7 @@ def index():
     '''Home page, still need to work on it.'''
     if session.get('logged_in') is None:
         session['logged_in'] = False 
-    return render_template('countdown.html')
+    return render_template('countdown.html', logged_in=session['logged_in'])
 
 @app.route('/login')
 def login():
@@ -65,6 +65,7 @@ def logout():
 
 @app.route('/callback', methods=['GET'])
 def callback():
+    '''The url that is the user is redirected to'''
     sbhs = OAuth2Session(client_id, state=session['oauth_state'])
     token = sbhs.fetch_token(token_url, 
                              client_secret=client_secret,
