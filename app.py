@@ -72,7 +72,7 @@ def callback():
                              authorization_response=request.url)
     session['oauth_token'] = token
     session['logged_in'] = True
-    return redirect(url_for('_logged_in'))
+    return redirect(url_for('index'))
 
 @app.route("/profile", methods=["GET"])
 @login_required()
