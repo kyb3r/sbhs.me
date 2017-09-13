@@ -49,7 +49,7 @@ body, html {height: 100%}
   </div>
 </div>
   <div class="w3-display-bottomleft w3-padding-large w3-animate-opacity">
-  {% if logged_in %}
+  {% if session.logged_in %}
   <a href="/login" class="w3-bar-item w3-button">Login</a>
   {% else %}
   <a href="/logout" class="w3-bar-item w3-button">Logout</a>
