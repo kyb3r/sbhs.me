@@ -91,11 +91,6 @@ def daily_notices():
 def todo_list():
     return render_template('template.html', top='Error!', bot='Not implemented yet!')
 
-@app.route('/cocurricular', methods=["GET"])
-@login_required()
-def todo_list():
-    return render_template('template.html', top='Error!', bot='Not implemented yet!')
-
 @app.route('/api/<path:endpoint>', methods=["GET"])
 @login_required()
 def dynamic(endpoint):
